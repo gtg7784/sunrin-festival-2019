@@ -5,8 +5,10 @@ import glob
 import PyQt5.QtWidgets as pq
 import PyQt5.QtGui as gui
 import PyQt5.QtCore as cr
-import tensorflow
 import numpy as np
+from tensorflow import keras
+import os
+
 class first(pq.QWidget):
     def __init__(self):
         super().__init__()
@@ -15,8 +17,14 @@ class first(pq.QWidget):
         self.resize(400,280)
         self.setUi()
     def setUi(self):
+
         self.label=pq.QLabel('당신의 스타일은?!?!',self)
-        self.label.move(130,100)
+        self.label.move(80,100)
+        self.label.setAlignment(cr.Qt.AlignHCenter)
+        font=self.label.font()
+        font.setPointSize(20)
+        font.setBold(True)
+        self.label.setFont(font)
         btn_move=pq.QPushButton('사진 찍기',self)
         btn_move.clicked.connect(self.pic)
         btn_move.resize(100,50)
@@ -38,7 +46,10 @@ class first(pq.QWidget):
             key = cv2.waitKey(1)
 
             if key == ord('q'):
-                return;
+                capture.release()
+                cv2.destroyAllWindows()
+                return
+
             elif key == ord('s'):
 
                 break
@@ -46,45 +57,47 @@ class first(pq.QWidget):
         capture.release()
         cv2.destroyAllWindows()
         print(frame.shape)
-        # from keras.models import load_model
-        # model=load_model('model.h5')
-        model=tensorflow.keras.models.load_model('model.h5')
+        model=keras.models.load_model('model.h5')
+        print('로딩성공')
         data = frame / 255.0
         img=cv2.resize(data,(48,48))
         img=img.reshape(1,48,48,3)
         pre=model.predict(img)
         pre=pre.reshape(-1)
         max=np.argmax(pre)
+
         if int(max) == 0:
-            print('amekaji')
-            self.label.setText('amekaji')
+            kind='amekaji'
+            print(kind)
+            self.label.setText(kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
-            path = './' + 'data/train/amekaji' + name
+            path = os.path.join('./', 'data/train/',kind, name)
             cv2.imwrite(path, frame)
             print(path, 'saved')
         elif int(max) == 1:
-            print('casual')
-            self.label.setText('casual')
+            kind='casual'
+            print(kind)
+            self.label.setText(kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
-            path = './' + 'data/test/' + name
+            path = os.path.join('./', 'data/train/', kind, name)
             cv2.imwrite(path, frame)
             print(path, 'saved')
         elif int(max) == 2:
-            print('dandy')
-            self.label.setText('dandy')
+            kind = 'dandy'
+            print(kind)
+            self.label.setText(kind)
+            name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
+            path = os.path.join('./', 'data/train/', kind, name)
+            cv2.imwrite(path, frame)
+            print(path, 'saved')
         elif int(max) == 3:
-            print('street')
-            self.label.setText('street')
-
-
-
-
-
-
-
-
-
-
+            kind = 'street'
+            print(kind)
+            self.label.setText(kind)
+            name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
+            path = os.path.join('./', 'data/train/', kind, name)
+            cv2.imwrite(path, frame)
+            print(path, 'saved')
 
 if __name__=='__main__':
     app=pq.QApplication(sys.argv)
