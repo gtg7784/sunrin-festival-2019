@@ -19,14 +19,20 @@ class first(pq.QWidget):
     def setUi(self):
 
         self.label=pq.QLabel('당신의 스타일은?!?!',self)
-        self.label.move(80,100)
+        self.label.move(15,100)
         self.label.setAlignment(cr.Qt.AlignHCenter)
+        self.label.resize(400,200)
         font=self.label.font()
         font.setPointSize(20)
         font.setBold(True)
+        font.setFamily('NanumSquare')
         self.label.setFont(font)
         btn_move=pq.QPushButton('사진 찍기',self)
         btn_move.clicked.connect(self.pic)
+        btn_font=btn_move.font()
+        btn_font.setFamily('NanumSquare')
+        btn_move.setFont(btn_font)
+
         btn_move.resize(100,50)
         btn_move.move(140,200)
 
@@ -69,7 +75,7 @@ class first(pq.QWidget):
         if int(max) == 0:
             kind='amekaji'
             print(kind)
-            self.label.setText(kind)
+            self.label.setText('당신의 스타일은:'+kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
             path = os.path.join('./', 'data/train/',kind, name)
             cv2.imwrite(path, frame)
@@ -77,7 +83,7 @@ class first(pq.QWidget):
         elif int(max) == 1:
             kind='casual'
             print(kind)
-            self.label.setText(kind)
+            self.label.setText('당신의 스타일은:'+kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
             path = os.path.join('./', 'data/train/', kind, name)
             cv2.imwrite(path, frame)
@@ -85,7 +91,7 @@ class first(pq.QWidget):
         elif int(max) == 2:
             kind = 'dandy'
             print(kind)
-            self.label.setText(kind)
+            self.label.setText('당신의 스타일은:'+kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
             path = os.path.join('./', 'data/train/', kind, name)
             cv2.imwrite(path, frame)
@@ -93,7 +99,7 @@ class first(pq.QWidget):
         elif int(max) == 3:
             kind = 'street'
             print(kind)
-            self.label.setText(kind)
+            self.label.setText('당신의 스타일은:'+kind)
             name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
             path = os.path.join('./', 'data/train/', kind, name)
             cv2.imwrite(path, frame)
