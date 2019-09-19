@@ -85,7 +85,7 @@ model.add(keras.layers.Dense(64, activation='relu'))
 model.add(keras.layers.Dense(n_classes, activation='softmax'))
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(trainset, label, epochs=10, batch_size=64)
-model.save_weights('./weights.h5')
+model.save('./model.h5')
 
 result_onehot = model.predict(testset)
 result_sparse = np.argmax(result_onehot, axis=1)
