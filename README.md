@@ -3,6 +3,9 @@ sunrin internet highschool festival 2019 emotion booth
 
 get data from instagram using [instagram crawler](https://github.com/gtg7784/instagram_crawler)
 
+camera.py is taking picture
+
+train.py is image classification with cnn
 
 ```
 여러분 잠깐!! ٩(๑`ε´๑)۶
@@ -31,3 +34,4 @@ get data from instagram using [instagram crawler](https://github.com/gtg7784/ins
 
 2019 Co. Emotion
 ```
+![2019 sunrin festival emotion poster](https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/70876076_1061202024087192_7703184082015879168_n.jpg?_nc_cat=105&_nc_oc=AQmgLd6kSR9gOVqSATxRW4Ku3wSloWtVe9zrAXCjmp1iFMUN6Y5CFKNCCDAB2oIvneY&_nc_ht=scontent-icn1-1.xx&oh=2499c79cee2db064e14a944c19efc8d0&oe=5DF15302)
